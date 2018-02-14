@@ -1,0 +1,15 @@
+# node:6.12.3
+FROM {{image}}
+
+# Mimic the BitBucket pipeline configuration
+RUN mkdir -p /opt/atlassian/bitbucketci/agent/
+
+COPY . /opt/atlassian/bitbucketci/agent/
+
+# Setup
+RUN cd /opt/atlassian/bitbucketci/agent/; npm install js-yaml
+
+# Parse and execute our actual bitbucket pipelines script
+RUN cd /opt/atlassian/bitbucketci/agent/; node ./bbpipelines-temp/generateBash.js
+
+RUN cd /opt/atlassian/bitbucketci/agent/; /bin/bash ./bitbucket-pipelines.generated.sh

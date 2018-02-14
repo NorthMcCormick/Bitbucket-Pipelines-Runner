@@ -3,13 +3,15 @@
 'use strict';
 
 const Commander = require('commander');
-const fs = require('fs');
 const packageJson = require('./package.json');
 
 Commander
   .version(packageJson.version)
-  .option('-p, --peppers', 'Add peppers')
-  .option('-P, --pineapple', 'Add pineapple')
-  .option('-b, --bbq-sauce', 'Add bbq sauce')
-  .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
+  .option('-m, --mode', 'default')
   .parse(process.argv);
+
+try {
+  let runner = require(`./lib/classes/process-${(Commander.mode ? Commander.mode : 'default')}.class.js`).run(Commander);
+} catch(e) {
+  console.error(e);
+}
