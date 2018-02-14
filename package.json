@@ -1,0 +1,14 @@
+{
+  "name": "bitbucket-pipelines-runner",
+  "version": "1.0.0",
+  "description": "Automate and run your Bitbucket pipeline file locally",
+  "main": "index.js",
+  "author": "North McCormick <northmccormick@icloud.com>",
+  "license": "MIT",
+  "bin": {
+    "bbpipeline": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.14.1"
+  }
+}
